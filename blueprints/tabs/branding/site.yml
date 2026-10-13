@@ -1,0 +1,85 @@
+# ==========================================================
+# Tabs :: Branding :: Site
+# ==========================================================
+
+label: Branding
+icon: palette
+columns:
+  columnTop:
+    width: 4/6
+    sections:
+      brandingContentTop:
+        type: fields
+        fields:
+          palettes:
+            type: structure
+            label: Color Palettes
+            translate: false
+            empty: No color palettes created yet.
+            add: Add Palette
+            fields:
+              label:
+                type: text
+                label: Palette Name
+                required: true
+                placeholder: e.g., Primary Brand Theme
+              swatches:
+                type: structure
+                label: Color Swatches
+                empty: No swatches added to this palette.
+                add: Add Swatch
+                fields:
+                  name:
+                    type: text
+                    label: Color Name
+                    required: true
+                    placeholder: e.g., Deep Navy
+                  value:
+                    type: color
+                    label: Hex Value
+                    format: hex
+                    required: true
+  columnBottom:
+    width: 4/6
+    sections:
+      brandingContentBottom:
+        type: fields
+        fields:
+          marks:
+            type: structure
+            label: Marks
+            translate: false
+            empty: No logo marks yet.
+            add: Add Mark
+            columns:
+              name:
+                width: 1/4
+              slug:
+                width: 1/4
+              file:
+                width: 2/4
+            fields:
+              name:
+                type: text
+                label: Name
+                required: true
+                placeholder: e.g., Primary Logo
+                width: 1/2
+                autofocus: false
+              slug:
+                type: slug
+                label: Slug
+                sync: name
+                required: true
+                width: 1/2
+              file:
+                type: files
+                label: File
+                max: 1
+                multiple: false
+                required: true
+                query: site.files
+                uploads: image
+                image:
+                  cover: true
+                  ratio: 1/1
