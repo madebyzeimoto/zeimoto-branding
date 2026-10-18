@@ -58,6 +58,12 @@ The field extends Kirby's `color` field and offers the site's palettes as
 swatches. Palettes always come from the Branding tab, never from the blueprint.
 When none are defined it offers black and white.
 
+## Compiler compatibility
+
+The palette field uses a render function and works with
+`panel.vue.compiler` set to `false`. No runtime template compilation or extra
+build step is required.
+
 ## Integration
 
 There are no plugin options and no build step; Kirby loads `index.js` and

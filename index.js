@@ -60,44 +60,35 @@ panel.plugin("zeimoto/branding", {
           this.$emit("input", this.isSelected(hex) ? "" : hex)
         },
       },
-      template: `
-        <k-field
-          :help="help"
-          :label="label"
-          :name="name"
-          :required="required"
-          class="k-zeimoto-color-field"
-        >
-          <div class="k-zeimoto-color-palettes">
-            <section
-              v-for="palette in resolvedPalettes"
-              :key="palette.label"
-              class="k-zeimoto-color-palette"
-            >
-              <h3 class="k-zeimoto-color-palette-label">{{ palette.label }}</h3>
-              <ul class="k-zeimoto-color-swatches">
-                <li v-for="swatch in palette.swatches" :key="swatch.value">
-                  <button
-                    :aria-pressed="isSelected(swatch.value)"
-                    :class="{ 'is-selected': isSelected(swatch.value) }"
-                    :disabled="disabled"
-                    :title="swatch.name + ' (' + swatch.value + ')'"
-                    class="k-zeimoto-color-swatch"
-                    type="button"
-                    @click="select(swatch.value)"
-                  >
-                    <span
-                      class="k-zeimoto-color-chip"
-                      :style="{ background: swatch.value }"
-                    ></span>
-                    <span class="k-zeimoto-color-name">{{ swatch.name }}</span>
-                  </button>
-                </li>
-              </ul>
-            </section>
-          </div>
-        </k-field>
-      `,
+      render(h) {
+        return h("k-field", {
+          class: "k-zeimoto-color-field",
+          props: { help: this.help, label: this.label, name: this.name, required: this.required },
+        }, [
+          h("div", { class: "k-zeimoto-color-palettes" }, this.resolvedPalettes.map((palette) =>
+            h("section", { key: palette.label, class: "k-zeimoto-color-palette" }, [
+              h("h3", { class: "k-zeimoto-color-palette-label" }, palette.label),
+              h("ul", { class: "k-zeimoto-color-swatches" }, palette.swatches.map((swatch) =>
+                h("li", { key: swatch.value }, [
+                  h("button", {
+                    class: ["k-zeimoto-color-swatch", { "is-selected": this.isSelected(swatch.value) }],
+                    attrs: {
+                      "aria-pressed": this.isSelected(swatch.value),
+                      disabled: this.disabled,
+                      title: `${swatch.name} (${swatch.value})`,
+                      type: "button",
+                    },
+                    on: { click: () => this.select(swatch.value) },
+                  }, [
+                    h("span", { class: "k-zeimoto-color-chip", style: { background: swatch.value } }),
+                    h("span", { class: "k-zeimoto-color-name" }, swatch.name),
+                  ]),
+                ])
+              )),
+            ])
+          )),
+        ])
+      },
     },
   },
 })
