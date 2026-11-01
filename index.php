@@ -82,7 +82,7 @@ Kirby::plugin("zeimoto/branding", [
           if (empty($palettes)) {
             $palettes[] = [
               "label" => "Default Palette (B&W)",
-              "swatches" => [["name" => "White", "value" => "#ffffff"], ["name" => "Black", "value" => "#000000"]],
+              "swatches" => [["name" => "Black", "value" => "#000000"], ["name" => "White", "value" => "#ffffff"]],
             ];
           }
 
