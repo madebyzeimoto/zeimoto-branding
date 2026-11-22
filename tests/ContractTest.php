@@ -20,14 +20,16 @@ final class ContractTest extends PluginTestCase
   {
     $app = $this->app();
     self::assertNull(zeimotoMark("missing"));
-    $field = new Field("zeimoto-color", ["name" => "color", "model" => $app->site()]);
+    $class = Field::resolve("zeimoto-color");
+    $field = new $class(name: "color", model: $app->site());
     self::assertNotEmpty($field->palettes());
   }
 
   public function testConfiguredPaletteAndRawAlt(): void
   {
     $app = $this->app(site: ["content" => ["palettes" => "- label: Brand\n  swatches:\n    - name: Accent\n      value: '#123456'"]]);
-    $field = new Field("zeimoto-color", ["name" => "color", "model" => $app->site()]);
+    $class = Field::resolve("zeimoto-color");
+    $field = new $class(name: "color", model: $app->site());
     self::assertSame("#123456", $field->palettes()[0]["swatches"][0]["value"]);
     $file = new File(["filename" => "mark.svg", "parent" => $app->site(), "content" => ["alt" => "A & B"]]);
     self::assertSame("A & B", zeimotoMarkAlt($file));

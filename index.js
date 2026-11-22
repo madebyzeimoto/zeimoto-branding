@@ -6,21 +6,12 @@
 //
 // ==========================================================
 
+import { h } from "vue"
+
 panel.plugin("zeimoto/branding", {
   fields: {
     "zeimoto-color": {
-      props: {
-        disabled: Boolean,
-        help: String,
-        label: String,
-        name: String,
-        required: Boolean,
-        value: String,
-        palettes: {
-          type: Array,
-          default: () => [],
-        },
-      },
+      emits: ["input"],
       computed: {
         // The branding palettes, plus a "Custom" group holding the current
         // value when it was set manually but no longer matches any swatch in
@@ -60,11 +51,11 @@ panel.plugin("zeimoto/branding", {
           this.$emit("input", this.isSelected(hex) ? "" : hex)
         },
       },
-      render(h) {
+      render() {
         return h("k-field", {
           class: "k-zeimoto-color-field",
-          props: { help: this.help, label: this.label, name: this.name, required: this.required },
-        }, [
+          help: this.help, label: this.label, name: this.name, required: this.required,
+        }, { default: () => [
           h("div", { class: "k-zeimoto-color-palettes" }, this.resolvedPalettes.map((palette) =>
             h("section", { key: palette.label, class: "k-zeimoto-color-palette" }, [
               h("h3", { class: "k-zeimoto-color-palette-label" }, palette.label),
@@ -72,13 +63,11 @@ panel.plugin("zeimoto/branding", {
                 h("li", { key: swatch.value }, [
                   h("button", {
                     class: ["k-zeimoto-color-swatch", { "is-selected": this.isSelected(swatch.value) }],
-                    attrs: {
-                      "aria-pressed": this.isSelected(swatch.value),
-                      disabled: this.disabled,
-                      title: `${swatch.name} (${swatch.value})`,
-                      type: "button",
-                    },
-                    on: { click: () => this.select(swatch.value) },
+                    "aria-pressed": this.isSelected(swatch.value),
+                    disabled: this.disabled,
+                    title: `${swatch.name} (${swatch.value})`,
+                    type: "button",
+                    onClick: () => this.select(swatch.value),
                   }, [
                     h("span", { class: "k-zeimoto-color-chip", style: { background: swatch.value } }),
                     h("span", { class: "k-zeimoto-color-name" }, swatch.name),
@@ -87,7 +76,7 @@ panel.plugin("zeimoto/branding", {
               )),
             ])
           )),
-        ])
+        ] })
       },
     },
   },

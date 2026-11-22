@@ -6,7 +6,7 @@ two global helpers for resolving marks. It does not style the public frontend.
 
 ## Installation
 
-Requires PHP 8.5 and Kirby 5.6.1 or later within Kirby 5.
+Requires PHP 8.5 and Kirby 6.
 The Composer package is `zeimoto/branding` and installs into
 `site/plugins/zeimoto-branding`. Release versions come from Git tags.
 
