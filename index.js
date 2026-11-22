@@ -11,6 +11,18 @@ import { h } from "vue"
 panel.plugin("zeimoto/branding", {
   fields: {
     "zeimoto-color": {
+      props: {
+        disabled: Boolean,
+        help: String,
+        label: String,
+        name: String,
+        required: Boolean,
+        value: String,
+        palettes: {
+          type: Array,
+          default: () => [],
+        },
+      },
       emits: ["input"],
       computed: {
         // The branding palettes, plus a "Custom" group holding the current
@@ -19,19 +31,20 @@ panel.plugin("zeimoto/branding", {
         // Without this the saved color would be invisible/unselectable here.
         resolvedPalettes() {
           if (!this.value) {
-            return this.palettes
+            return this.palettes ?? []
           }
 
-          const known = this.palettes.some((palette) =>
+          const palettes = this.palettes ?? []
+          const known = palettes.some((palette) =>
             palette.swatches.some((swatch) => this.isSelected(swatch.value))
           )
 
           if (known) {
-            return this.palettes
+            return palettes
           }
 
           return [
-            ...this.palettes,
+            ...palettes,
             {
               label: "Custom",
               swatches: [{ name: this.value, value: this.value }],
