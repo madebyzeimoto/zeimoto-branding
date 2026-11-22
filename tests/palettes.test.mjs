@@ -12,7 +12,7 @@ import { readFileSync } from "node:fs"
 import vm from "node:vm"
 
 let field
-vm.runInNewContext(readFileSync(new URL("../index.js", import.meta.url), "utf8"), {
+vm.runInNewContext(readFileSync(new URL("../index.js", import.meta.url), "utf8").replace(/^import .*$/m, ""), {
   panel: { plugin: (_name, config) => { field = config.fields["zeimoto-color"] } },
 })
 
