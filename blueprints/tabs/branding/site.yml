@@ -2,7 +2,8 @@
 # Tabs :: Branding :: Site
 # ==========================================================
 
-label: Branding
+label:
+  "*": zeimoto-branding.tabs.branding
 icon: palette
 columns:
   columnTop:
@@ -10,30 +11,41 @@ columns:
     fields:
       palettes:
         type: structure
-        label: Color Palettes
+        label:
+          "*": zeimoto-branding.fields.palettes
         translate: false
-        empty: No color palettes created yet.
-        add: Add Palette
+        empty:
+          "*": zeimoto-branding.fields.palette-empty
+        add:
+          "*": zeimoto-branding.fields.palette-add
         fields:
           label:
             type: text
-            label: Palette Name
+            label:
+              "*": zeimoto-branding.fields.palette-name
             required: true
-            placeholder: e.g., Primary Brand Theme
+            placeholder:
+              "*": zeimoto-branding.fields.palette-placeholder
           swatches:
             type: structure
-            label: Color Swatches
-            empty: No swatches added to this palette.
-            add: Add Swatch
+            label:
+              "*": zeimoto-branding.fields.swatches
+            empty:
+              "*": zeimoto-branding.fields.swatches-empty
+            add:
+              "*": zeimoto-branding.fields.swatches-add
             fields:
               name:
                 type: text
-                label: Color Name
+                label:
+                  "*": zeimoto-branding.fields.color-name
                 required: true
-                placeholder: e.g., Deep Navy
+                placeholder:
+                  "*": zeimoto-branding.fields.color-placeholder
               value:
                 type: color
-                label: Hex Value
+                label:
+                  "*": zeimoto-branding.fields.hex-value
                 format: hex
                 required: true
   columnBottom:
@@ -41,10 +53,13 @@ columns:
     fields:
       marks:
         type: structure
-        label: Marks
+        label:
+          "*": zeimoto-branding.fields.marks
         translate: false
-        empty: No logo marks yet.
-        add: Add Mark
+        empty:
+          "*": zeimoto-branding.fields.marks-empty
+        add:
+          "*": zeimoto-branding.fields.marks-add
         columns:
           name:
             width: 1/4
@@ -55,20 +70,24 @@ columns:
         fields:
           name:
             type: text
-            label: Name
+            label:
+              "*": zeimoto-branding.fields.name
             required: true
-            placeholder: e.g., Primary Logo
+            placeholder:
+              "*": zeimoto-branding.fields.name-placeholder
             width: 1/2
             autofocus: false
           slug:
             type: slug
-            label: Slug
+            label:
+              "*": zeimoto-branding.fields.slug
             sync: name
             required: true
             width: 1/2
           file:
             type: filepicker
-            label: File
+            label:
+              "*": zeimoto-branding.fields.file
             max: 1
             multiple: false
             required: true

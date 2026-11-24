@@ -14,6 +14,8 @@ use Kirby\Cms\File;
 use Kirby\Toolkit\Str;
 use Zeimoto\Branding\ColorField;
 
+$flatten = require __DIR__ . "/languages/flatten-blueprint-translations.php";
+
 load([
   ColorField::class => "src/ColorField.php",
 ], __DIR__);
@@ -53,6 +55,9 @@ if (function_exists("zeimotoMarkAlt") === false) {
 }
 
 Kirby::plugin("zeimoto/branding", [
+  "translations" => [
+    "en" => $flatten(require __DIR__ . "/languages/blueprints/en.php"),
+  ],
   "fields" => [
     "zeimoto-color" => ColorField::class,
   ],
